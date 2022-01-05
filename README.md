@@ -1,5 +1,5 @@
 # Flyspray
-Flyspray container built on a LAPP framework that is based on the official repositories: PHP:apache and Postgres.
+A very simple LAPP framework using flyspray as an example. Based on the official repositories: PHP:apache and Postgres.
 
 This is version 0.11: a functioning version, use at your own risk.
 
@@ -14,9 +14,9 @@ The postgres data directory (/var/lib/postgresql/data) must be stored externally
 ## Environment variables
 
 As mentioned above the docker-compose files uses several environment variables which should be set by the user before running `docker-compose up`. They are:
-- **POSTGRES_PASSWORD=<pw>** - where <pw> is the password for the postgres user
-- **POSTGRES_DATA_DIR=<path>** - <path> to a directory which hosts or will host the postgres data file. If it does not exist it will be created with the correct permissions and ownership
-- **APP_DIR=<path>** - <path> to the directory that contains the /var/www/html data. When it does not exist it will be created with the wrong ownership (root:root). Best is to create this file before running `docker-compose up` and perform a `chown -R www-data:www-data $APP_DIR`
+- **POSTGRES_PASSWORD=\<pw>** - where \<pw> is the password for the postgres user
+- **POSTGRES_DATA_DIR=\<path>** - \<path> to a directory which hosts or will host the postgres data file. If it does not exist it will be created with the correct permissions and ownership
+- **APP_DIR=\<path>** - \<path> to the directory that contains the /var/www/html data. When it does not exist it will be created with the wrong ownership (root:root). Best is to create this file before running `docker-compose up` and perform a `chown -R www-data:www-data $APP_DIR`
 
 ## Initialisation directories
 
