@@ -1,0 +1,9 @@
+FROM postgres:14.1-bullseye
+
+# copy postgres initialization files to postgres initialization directory
+COPY ./init.postgres/* /docker-entrypoint-initdb.d/
+
+# make the postgres port available
+EXPOSE 5432
+
+CMD ["docker-entrypoint.sh", "postgres"]

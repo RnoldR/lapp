@@ -1,0 +1,29 @@
+FROM debian:bullseye-20211201
+
+# v1.0-rc10/flyspray-1.0-rc10.tgz
+ENV FLYSPRAY_VERSION=1.0-rc10
+ENV SUB_PATH=v${FLYSPRAY_VERSION}/flyspray-${FLYSPRAY_VERSION}.tgz
+ENV FLYSPRAY_DL=https://github.com/Flyspray/flyspray/releases/download/${SUB_PATH}
+
+#RUN printf '#!/bin/sh\nexit 0\n' > /usr/sbin/policy-rc.d
+
+# The flyspray app must be run from /var/www/html
+
+# do an apt update and install non-interactive aids to prevent some warnings
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update 
+RUN apt install -y apt-utils wget
+
+# install certificates, done in php.docker  
+# install Postgre PDO, done in php.docker
+
+# download the flyspray image to /tmp
+RUN wget -O /tmp/flyspray.tgz ${FLYSPRAY_DL}
+
+# extract the flyspray image from /tmp to /tmp/app
+RUN mkdir -p /tmp/app
+RUN tar xzf /tmp/flyspray.tgz -C /tmp/app --strip-components=1
+
+# during run-time, copy the files to the /app directory and change ownership
+RUN mkdir -p /app
+CMD ["/bin/bash", "-c", "cp -r /tmp/app/* /app ; chown -R www-data:www-data /app"]

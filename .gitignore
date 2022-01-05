@@ -1,0 +1,13 @@
+# flyspray
+
+app/
+downloads/
+
+*.log
+.vscode
+test.php
+download/fs.tgz
+.env
+start.sh
+clear.sh
+var.sh
